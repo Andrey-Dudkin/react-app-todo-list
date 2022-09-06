@@ -1,0 +1,58 @@
+.app_todo_list{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.app_todo_list_container{
+    min-height: 10px;
+    background-color: #353432b3;
+    padding: 20px;
+}
+.title{
+    color: #5ce0e0;
+    padding-bottom: 15px;
+}
+
+.input_text{
+    border: 0;
+    outline: none;
+    width: 250px;
+    height: 30px;
+    background-color: #00ffff;
+}
+.btn_add_task{
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    background-color: #00ffff;
+    vertical-align: sub;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.content_task{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.item_task{
+    max-width:150px;
+    font-size: 18px;
+    color: #5ce0e0;
+    list-style-type: upper-roman;
+    word-wrap: break-word;
+    padding: 5px 0;
+    margin-left: 20px;
+}
+.delete,.edit{
+    border: none;
+    width: 20px;
+    height: 20px;
+    font-size: 18px;
+    background-color: #00ffff;
+    vertical-align: sub;
+    cursor: pointer;
+    margin-left: 8px;
+}

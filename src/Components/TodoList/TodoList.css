@@ -1,0 +1,44 @@
+.todo_list_app{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.todoList{
+    min-height: 10px;
+    background-color: #353432b3;
+    padding: 20px;
+}
+.title{
+    color: #5ce0e0;
+    padding-bottom: 15px;
+}
+.input_text{
+    border: 0;
+    outline: none;
+    width: 250px;
+    height: 30px;
+    background-color: #00ffff;
+}
+.add_task{
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 25px;
+    background-color: #00ffff;
+    vertical-align: sub;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.tasks{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tasks_item{
+    font-size: 20px;
+    color: #00ffff;
+    margin-top: 20px;
+}
+
