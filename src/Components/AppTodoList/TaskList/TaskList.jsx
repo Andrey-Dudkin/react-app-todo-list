@@ -1,5 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
+import iconPlus from "../icons/icon-plus.png"
+import iconEdit from "../icons/icon-edit.png"
+import iconDelete from "../icons/icon-delete.png"
+
 
 const TaskList = ({tasks,setTasks}) => {
     const [edit,setEdit] = useState(null)
@@ -44,13 +48,17 @@ const TaskList = ({tasks,setTasks}) => {
                         {
                             edit === task.id ?
                             <button
-                                onClick={() => saveTask(task.id)}
-                                className="btn_add_task">
-                            +</button>
+                                onClick={() => saveTask(task.id)}>
+                                <img src={iconPlus} alt="button icon plus" className="icon_plus" />
+                            </button>
                             :
                             <div className="buttons">
-                                <button onClick={() => editTask(task.id, task.textTask)} className='delete'>/</button>
-                                <button onClick={() => deleteTask(task.id)} className='edit'>Х</button>
+                                <button onClick={() => editTask(task.id, task.textTask)}>
+                                    <img className='icon_edit' src={iconEdit} alt="button icon edit" />
+                                </button>
+                                <button onClick={() => deleteTask(task.id)}>
+                                    <img className='icon_delete' src={iconDelete} alt="button icon delete" />
+                                </button>
                             </div>
                         }
                        

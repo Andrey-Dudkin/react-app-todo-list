@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import iconPlus from "../icons/icon-plus.png"
 
 const AddTask = ({tasks,setTasks}) => {
   const [textInput,setTextInput] = useState("")
@@ -29,8 +30,9 @@ const AddTask = ({tasks,setTasks}) => {
             />
             <button
               onClick={addTask} 
-              className="btn_add_task"
-            >+</button>
+              className="btn_add_task">
+              <img src={iconPlus} alt="button icon plus" className="icon_plus" />
+            </button>
         </form>
     </div>
   )

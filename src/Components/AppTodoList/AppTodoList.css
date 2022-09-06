@@ -21,16 +21,24 @@
     height: 30px;
     background-color: #00ffff;
 }
-.btn_add_task{
+button{
     border: none;
     width: 30px;
     height: 30px;
     font-size: 25px;
-    background-color: #00ffff;
+    background-color: transparent;
     vertical-align: sub;
     margin-left: 10px;
     cursor: pointer;
 }
+.icon_plus,
+.icon_edit,
+.icon_delete{
+    width: 30px;
+    height: 30px;
+    vertical-align: sub;
+}
+
 .content_task{
     display: flex;
     justify-content: space-between;
