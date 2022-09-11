@@ -12,8 +12,8 @@
 .title{
     color: #5ce0e0;
     padding-bottom: 15px;
+    text-align: center;
 }
-
 .input_text{
     border: 0;
     outline: none;
@@ -21,24 +21,36 @@
     height: 30px;
     background-color: #00ffff;
 }
+/* #dropdown_menu{
+    display: block;
+    border: none;
+    outline: none;
+    background-color: #00ffff;
+    margin-top: 10px;    
+} */
+
 button{
     border: none;
-    width: 30px;
-    height: 30px;
-    font-size: 25px;
+    font-size: 16px;
     background-color: transparent;
     vertical-align: sub;
     margin-left: 10px;
     cursor: pointer;
 }
+.button{
+    color: #5ce0e0;
+    margin-top: 15px;
+}
+
 .icon_plus,
 .icon_edit,
-.icon_delete{
+.icon_delete,
+.icon_lock_close,
+.icon_lock_open{
     width: 30px;
     height: 30px;
     vertical-align: sub;
 }
-
 .content_task{
     display: flex;
     justify-content: space-between;
@@ -46,21 +58,86 @@ button{
 }
 
 .item_task{
-    max-width:150px;
-    font-size: 18px;
+    max-width:110px;
+    font-size: 15px;
+    line-height: 20px;
     color: #5ce0e0;
     list-style-type: upper-roman;
     word-wrap: break-word;
     padding: 5px 0;
     margin-left: 20px;
 }
-.delete,.edit{
-    border: none;
-    width: 20px;
-    height: 20px;
-    font-size: 18px;
-    background-color: #00ffff;
-    vertical-align: sub;
-    cursor: pointer;
-    margin-left: 8px;
+.close{
+    color: #70a8a8;
+    text-decoration: line-through;
+    list-style-type: upper-roman;
+    padding: 5px 0;
+    margin-left: 20px;
 }
+
+/* Form Registration */
+/* .form-container {
+    width: 360px;
+    background-color: #303131;
+    margin: auto;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    padding: 10px;
+    margin-top: 30px;
+  }
+  .title_form{
+    color: #00ffff;
+    text-align: center;
+    margin-top: 15px;
+}
+  
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 10px;
+  }
+  
+  .success-message {
+    font-family: "Roboto", sans-serif;
+    background-color: #3f89f8;
+    padding: 15px;
+    color: white;
+  }
+  
+  .form-field {
+    margin: 10px 0 10px 0;
+    padding: 15px;
+    font-size: 16px;
+    border: 0;
+    font-family: "Roboto", sans-serif;
+  }
+  
+  span {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    color: red;
+    margin-bottom: 15px;
+  }
+  
+  input {
+    outline: none;
+    background: #f2f2f2;
+  }
+  input:focus{
+    border:  2px solid #5ce0e0;
+  }
+  
+  .error {
+    border-style: solid;
+    border: 2px solid #ffa4a4;
+  }
+  
+  button {
+    background: #5ce0e0;
+    color: #000000;
+    cursor: pointer;
+  }
+  
+  button:disabled {
+    cursor: default;
+  } */

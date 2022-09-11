@@ -3,11 +3,16 @@ import { useState } from 'react'
 import iconPlus from "../icons/icon-plus.png"
 import iconEdit from "../icons/icon-edit.png"
 import iconDelete from "../icons/icon-delete.png"
+import iconLockClose from "../icons/icon-lock-close.png"
+import iconLockOpen from "../icons/icon-lock-open.png"
+
 
 
 const TaskList = ({tasks,setTasks}) => {
+    // console.log(tasks)
     const [edit,setEdit] = useState(null)
     const [value,setValue] = useState("")
+    const [filtered,setFiltered] = useState(tasks)
     const deleteTask = (id) => {
         let nevTasks = [...tasks].filter(task => task.id!==id)
         setTasks(nevTasks)
@@ -26,11 +31,37 @@ const TaskList = ({tasks,setTasks}) => {
         setTasks(nevTodo)
         setEdit(null)
     }
+    const statusTask = (id) => {
+       let newTasks = [...tasks].filter(task =>{
+            if(task.id === id){
+                task.status = !task.status
+            }
+            return task
+       })
+       setTasks(newTasks) 
+    }
+    const filterTask = (status) => {
+        if(status === "all"){
+            setFiltered(tasks)
+        }else{
+            let nevTasks = [...tasks].filter(task => task.status === status)
+            setFiltered(nevTasks)
+        }
+    }
   return (
     <div className='task_list'>
+        <button
+            className='button'
+             onClick={() => filterTask("all")}>Все</button>
+        <button
+            className='button' 
+            onClick={() => filterTask(true)}>Открытые</button>
+        <button
+            className='button' 
+            onClick={() => filterTask(false)}>Закрытые</button>
         <ol className="list_tasks">
             {
-                tasks.map(task => (
+                filtered.map(task => (
                     <div className='content_task' key={task.id}>
                         {
                             edit === task.id ?
@@ -43,7 +74,7 @@ const TaskList = ({tasks,setTasks}) => {
                                     placeholder="Ведите текст задачи"
                                 />
                             </div>
-                            : <li className="item_task"> {task.textTask}</li>
+                            : <li className={!task.status ? `close` : `item_task`}> {task.textTask}</li>
                         }
                         {
                             edit === task.id ?
@@ -55,6 +86,13 @@ const TaskList = ({tasks,setTasks}) => {
                             <div className="buttons">
                                 <button onClick={() => editTask(task.id, task.textTask)}>
                                     <img className='icon_edit' src={iconEdit} alt="button icon edit" />
+                                </button>
+                                
+                                <button onClick={() => statusTask(task.id)}>
+                                    {
+                                        task.status ? <img className='icon_lock_close' src={iconLockClose} alt="button icon lock clos" /> 
+                                        :  <img className='icon_lock_open' src={iconLockOpen} alt="button icon lock open" />
+                                    }
                                 </button>
                                 <button onClick={() => deleteTask(task.id)}>
                                     <img className='icon_delete' src={iconDelete} alt="button icon delete" />

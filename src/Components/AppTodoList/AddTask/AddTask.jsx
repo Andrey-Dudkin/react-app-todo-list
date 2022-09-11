@@ -12,12 +12,14 @@ const AddTask = ({tasks,setTasks}) => {
           ...tasks,{
             textTask: textInput,
             id: Math.random() *1000,
+            status: true,
           }
         ]
       )
       setTextInput("")
     }
   }
+
   return (
     <div className='add_task'>
        <form className="forma">
@@ -33,6 +35,7 @@ const AddTask = ({tasks,setTasks}) => {
               className="btn_add_task">
               <img src={iconPlus} alt="button icon plus" className="icon_plus" />
             </button>
+           
         </form>
     </div>
   )
