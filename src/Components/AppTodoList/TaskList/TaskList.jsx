@@ -6,13 +6,14 @@ import iconDelete from "../icons/icon-delete.png"
 import iconLockClose from "../icons/icon-lock-close.png"
 import iconLockOpen from "../icons/icon-lock-open.png"
 
-
+const statuses = {All: 0, Open: 1, Closed: 2}
 
 const TaskList = ({tasks,setTasks}) => {
     // console.log(tasks)
     const [edit,setEdit] = useState(null)
     const [value,setValue] = useState("")
-    const [filtered,setFiltered] = useState(tasks)
+    const [status, setStatus] = useState(statuses.All)
+
     const deleteTask = (id) => {
         let nevTasks = [...tasks].filter(task => task.id!==id)
         setTasks(nevTasks)
@@ -34,34 +35,31 @@ const TaskList = ({tasks,setTasks}) => {
     const statusTask = (id) => {
        let newTasks = [...tasks].filter(task =>{
             if(task.id === id){
-                task.status = !task.status
+                if(task.status === statuses.Open){
+                    task.status = statuses.Closed;
+                }
+                if(task.status === status.Closed){
+                    task.status = statuses.Open;
+                }
             }
             return task
        })
        setTasks(newTasks) 
     }
-    const filterTask = (status) => {
-        if(status === "all"){
-            setFiltered(tasks)
-        }else{
-            let nevTasks = [...tasks].filter(task => task.status === status)
-            setFiltered(nevTasks)
-        }
-    }
   return (
     <div className='task_list'>
         <button
             className='button'
-             onClick={() => filterTask("all")}>Все</button>
+             onClick={() => setStatus(statuses.All)}>Все</button>
         <button
             className='button' 
-            onClick={() => filterTask(true)}>Открытые</button>
+            onClick={() => setStatus(statuses.Open)}>Открытые</button>
         <button
             className='button' 
-            onClick={() => filterTask(false)}>Закрытые</button>
+            onClick={() => setStatus(statuses.Closed)}>Закрытые</button>
         <ol className="list_tasks">
             {
-                filtered.map(task => (
+                tasks.filter(task => task.status===status || status===statuses.All).map(task => (
                     <div className='content_task' key={task.id}>
                         {
                             edit === task.id ?
@@ -74,7 +72,7 @@ const TaskList = ({tasks,setTasks}) => {
                                     placeholder="Ведите текст задачи"
                                 />
                             </div>
-                            : <li className={!task.status ? `close` : `item_task`}> {task.textTask}</li>
+                            : <li className={task.status === statuses.Closed ? `close` : `item_task`}> {task.textTask}</li>
                         }
                         {
                             edit === task.id ?
@@ -90,7 +88,7 @@ const TaskList = ({tasks,setTasks}) => {
                                 
                                 <button onClick={() => statusTask(task.id)}>
                                     {
-                                        task.status ? <img className='icon_lock_close' src={iconLockClose} alt="button icon lock clos" /> 
+                                        task.status === statuses.Closed ? <img className='icon_lock_close' src={iconLockClose} alt="button icon lock clos" /> 
                                         :  <img className='icon_lock_open' src={iconLockOpen} alt="button icon lock open" />
                                     }
                                 </button>
@@ -108,4 +106,4 @@ const TaskList = ({tasks,setTasks}) => {
   )
 }
 
-export default TaskList
+export { TaskList, statuses }

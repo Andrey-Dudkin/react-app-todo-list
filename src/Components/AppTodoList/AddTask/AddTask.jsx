@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import iconPlus from "../icons/icon-plus.png"
+import {statuses} from '../TaskList/TaskList'
 
 const AddTask = ({tasks,setTasks}) => {
   const [textInput,setTextInput] = useState("")
@@ -12,7 +13,7 @@ const AddTask = ({tasks,setTasks}) => {
           ...tasks,{
             textTask: textInput,
             id: Math.random() *1000,
-            status: true,
+            status: statuses.Open,
           }
         ]
       )
