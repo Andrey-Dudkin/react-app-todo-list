@@ -76,7 +76,7 @@ button{
 }
 
 /* Form Registration */
-/* .form-container {
+.form-container {
     width: 360px;
     background-color: #303131;
     margin: auto;
@@ -128,8 +128,9 @@ button{
   }
   
   .error {
-    border-style: solid;
-    border: 2px solid #ffa4a4;
+    font-size: 15px;
+    color: #303131;
+    background-color: #5ce0e0;
   }
   
   button {
@@ -140,4 +141,4 @@ button{
   
   button:disabled {
     cursor: default;
-  } */
+  }
