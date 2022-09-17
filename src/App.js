@@ -5,7 +5,6 @@ import FormRegistration from './Components/FormRegistration/FormRegistration';
 function App() {
   return (
     <div className="App">
-        {/* <AppTodoList/> */}
         <FormRegistration/>
     </div>
   );

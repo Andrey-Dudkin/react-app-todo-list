@@ -3,6 +3,8 @@ import "../AppTodoList/AppTodoList.css"
 import {useForm} from "react-hook-form"
 import {yupResolver} from "@hookform/resolvers/yup"
 import * as you from "yup"
+import axios from 'axios'
+import { AUTH_SERVICE } from '../../Configs/baseUrls'
 
 const validation = you.object().shape({
     userName: you.string().required("Поле обязательно к заполенению"),
@@ -16,9 +18,16 @@ const FormRegistration = () => {
         resolver: yupResolver(validation),
     });
 
-    const submit = (data) => {
-        console.log(data)
+    const submit = (registrationData) => {
+        axios.post(AUTH_SERVICE + '/api/userauthentication', registrationData)
+            .then(response => {
+                localStorage.setItem('userId', response.data.user.id);
+                localStorage.setItem('token', response.data.token);
+                // localStorage.setItem('userName', response.data.user.userName);
+                // localStorage.setItem('email', response.data.user.email);
+            })
     }
+
     return (
         <div className='FormaRegistration'>
             <div className="form-container">

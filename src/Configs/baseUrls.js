@@ -1,0 +1,1 @@
+export const AUTH_SERVICE = "https://localhost:7271"
