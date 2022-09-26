@@ -1,24 +1,38 @@
 import React from 'react'
 import { useState } from 'react'
-import iconPlus from "../icons/icon-plus.png"
-import {statuses} from '../TaskList/TaskList'
+import "./AddTask.css"
+// import iconPlus from "../icons/icon-plus.png"
+// import {statuses} from '../TaskList/TaskList'
+import {TASK_SERVICE} from "../../../Configs/baseUrls"
+import axios from 'axios'
 
 const AddTask = ({tasks,setTasks}) => {
   const [textInput,setTextInput] = useState("")
+
   const addTask = (e) => {
-    e.preventDefault()
-   if (textInput){
-      setTasks(
-        [
-          ...tasks,{
-            textTask: textInput,
-            id: Math.random() *1000,
-            status: statuses.Open,
-          }
-        ]
-      )
-      setTextInput("")
+    if(textInput){
+      axios.post(TASK_SERVICE + "/tasks", 
+      {
+        "id": null,
+        "userGuid": localStorage.getItem("userId"),
+        "taskCategoryGuid": null,
+        "taskTitle": textInput,
+        "taskDescription": null,
+        "toDoStatus": 0
+      }, 
+      {
+        headers: {"Authorization": "Bearer " + localStorage.getItem("token")}
+      })
+      .then(response => {
+        setTasks(
+          [
+            ...tasks, response.data
+          ]
+        )
+      })
     }
+   
+    e.preventDefault()
   }
 
   return (
@@ -34,7 +48,7 @@ const AddTask = ({tasks,setTasks}) => {
             <button
               onClick={addTask} 
               className="btn_add_task">
-              <img src={iconPlus} alt="button icon plus" className="icon_plus" />
+              Добавить
             </button>
            
         </form>

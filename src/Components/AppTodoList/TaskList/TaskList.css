@@ -1,0 +1,53 @@
+.content_task{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+.filter_buttons{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+.button_filter{
+    border: none;
+    outline: none;
+    font-size: 10px;
+    background-color: #5ce0e0;
+    cursor: pointer;
+    padding: 5px;
+}
+.item_task{
+    max-width:110px;
+    font-size: 15px;
+    line-height: 20px;
+    color: #5ce0e0;
+    list-style-type: upper-roman;
+    word-wrap: break-word;
+    padding: 5px 0;
+    margin-left: 20px;
+}
+.edit_task,
+.status_task,
+.delete_task{
+    border: none;
+    outline: none;
+    font-size: 10px;
+    background-color: #5ce0e0;
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 10px;
+}
+.edit_task{
+    margin-left: 0px;
+}
+.close{
+    max-width:110px;
+    font-size: 15px;
+    line-height: 20px;
+    color: #70a8a8;
+    text-decoration: line-through;
+    list-style-type: upper-roman;
+    word-wrap: break-word;
+    padding: 5px 0;
+    margin-left: 20px;
+}

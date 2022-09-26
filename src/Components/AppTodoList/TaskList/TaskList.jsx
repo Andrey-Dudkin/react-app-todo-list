@@ -1,10 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
-import iconPlus from "../icons/icon-plus.png"
-import iconEdit from "../icons/icon-edit.png"
-import iconDelete from "../icons/icon-delete.png"
-import iconLockClose from "../icons/icon-lock-close.png"
-import iconLockOpen from "../icons/icon-lock-open.png"
+import "./TaskList.css"
+// import iconPlus from "../icons/icon-plus.png"
+// import iconEdit from "../icons/icon-edit.png"
+// import iconDelete from "../icons/icon-delete.png"
+// import iconLockClose from "../icons/icon-lock-close.png"
+// import iconLockOpen from "../icons/icon-lock-open.png"
+import axios from 'axios'
+import {TASK_SERVICE} from "../../../Configs/baseUrls"
+
 
 const statuses = {All: 0, Open: 1, Closed: 2}
 
@@ -15,8 +19,16 @@ const TaskList = ({tasks,setTasks}) => {
     const [status, setStatus] = useState(statuses.All)
 
     const deleteTask = (id) => {
-        let nevTasks = [...tasks].filter(task => task.id!==id)
-        setTasks(nevTasks)
+  
+        axios.delete(
+            TASK_SERVICE + "/tasks/" + id,
+           { headers: {"Authorization": "Bearer " + localStorage.getItem("token")}},
+        )
+        .then(response => {
+            // console.log(response)
+            let nevTasks = [...tasks].filter(task => task.id!==id)
+            setTasks(nevTasks)
+        })
     }
     const editTask = (id,textTask) => {
         setEdit(id)
@@ -32,34 +44,37 @@ const TaskList = ({tasks,setTasks}) => {
         setTasks(nevTodo)
         setEdit(null)
     }
-    const statusTask = (id) => {
-       let newTasks = [...tasks].filter(task =>{
-            if(task.id === id){
-                if(task.status === statuses.Open){
-                    task.status = statuses.Closed;
-                }
-                if(task.status === status.Closed){
-                    task.status = statuses.Open;
-                }
-            }
-            return task
-       })
-       setTasks(newTasks) 
-    }
+    // const statusTask = (id) => {
+    //    let newTasks = [...tasks].filter(task =>{
+    //         if(task.id === id){
+    //             if(task.status === statuses.Open){
+    //                 task.status = statuses.Closed;
+    //             }
+    //             if(task.status === status.Closed){
+    //                 task.status = statuses.Open;
+    //             }
+    //         }
+    //         return task
+    //    })
+    //    setTasks(newTasks) 
+    // }
   return (
     <div className='task_list'>
-        <button
-            className='button'
-             onClick={() => setStatus(statuses.All)}>Все</button>
-        <button
-            className='button' 
-            onClick={() => setStatus(statuses.Open)}>Открытые</button>
-        <button
-            className='button' 
-            onClick={() => setStatus(statuses.Closed)}>Закрытые</button>
+        <div className="filter_buttons">
+            <button
+                className='button_filter'
+                onClick={() => setStatus(statuses.All)}>Все</button>
+            <button
+                className='button_filter' 
+                onClick={() => setStatus(statuses.Open)}>Открытые</button>
+            <button
+                className='button_filter' 
+                onClick={() => setStatus(statuses.Closed)}>Закрытые</button>
+        </div>
         <ol className="list_tasks">
             {
-                tasks.filter(task => task.status===status || status===statuses.All).map(task => (
+                tasks.map(task => (
+
                     <div className='content_task' key={task.id}>
                         {
                             edit === task.id ?
@@ -72,28 +87,36 @@ const TaskList = ({tasks,setTasks}) => {
                                     placeholder="Ведите текст задачи"
                                 />
                             </div>
-                            : <li className={task.status === statuses.Closed ? `close` : `item_task`}> {task.textTask}</li>
+                            : <li className={task.status === statuses.Closed ? `close` : `item_task`}> {task.taskTitle}</li>
                         }
                         {
                             edit === task.id ?
-                            <button
+                            <button 
+                                className='btn_add_task'
                                 onClick={() => saveTask(task.id)}>
-                                <img src={iconPlus} alt="button icon plus" className="icon_plus" />
+                                {/* <img src={iconPlus} alt="button icon plus" className="icon_plus" /> */}
+                                Добавить
                             </button>
                             :
                             <div className="buttons">
-                                <button onClick={() => editTask(task.id, task.textTask)}>
-                                    <img className='icon_edit' src={iconEdit} alt="button icon edit" />
+                                <button className='edit_task' onClick={() => editTask(task.id, task.textTask)}>
+                                    Редактировать
+                                    {/* <img className='icon_edit' src={iconEdit} alt="button icon edit" /> */}
                                 </button>
                                 
-                                <button onClick={() => statusTask(task.id)}>
+                                <button
+                                    className='status_task'
+                                    //  onClick={() => statusTask(task.id)}
+                                     >
                                     {
-                                        task.status === statuses.Closed ? <img className='icon_lock_close' src={iconLockClose} alt="button icon lock clos" /> 
-                                        :  <img className='icon_lock_open' src={iconLockOpen} alt="button icon lock open" />
+                                        task.status === statuses.Closed ? 
+                                            <p>Открыть</p>
+                                        :   <p>Закрыть</p>
                                     }
                                 </button>
-                                <button onClick={() => deleteTask(task.id)}>
-                                    <img className='icon_delete' src={iconDelete} alt="button icon delete" />
+                                <button className='delete_task' onClick={() => deleteTask(task.id)}>
+                                    {/* <img className='icon_delete' src={iconDelete} alt="button icon delete" /> */}
+                                    Удалить
                                 </button>
                             </div>
                         }
