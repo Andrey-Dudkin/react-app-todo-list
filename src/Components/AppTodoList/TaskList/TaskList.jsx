@@ -30,19 +30,21 @@ const TaskList = ({tasks,setTasks}) => {
             setTasks(nevTasks)
         })
     }
-    const editTask = (id,textTask) => {
+    const editTask = (id,taskTitle) => {
         setEdit(id)
-        setValue(textTask)
+        setValue(taskTitle)
     }
     const saveTask = (id) => {
-            let nevTodo = [...tasks].map(elementTask => {
-                if(elementTask.id === id){
-                    elementTask.textTask = value
-                }
-                return elementTask
-        })
-        setTasks(nevTodo)
-        setEdit(null)
+        if(value){
+                let nevTodo = [...tasks].map(elementTask => {
+                    if(elementTask.id === id){
+                        elementTask.taskTitle = value
+                    }
+                    return elementTask
+            })
+            setTasks(nevTodo)
+            setEdit(null)
+        }
     }
     // const statusTask = (id) => {
     //    let newTasks = [...tasks].filter(task =>{
@@ -99,7 +101,7 @@ const TaskList = ({tasks,setTasks}) => {
                             </button>
                             :
                             <div className="buttons">
-                                <button className='edit_task' onClick={() => editTask(task.id, task.textTask)}>
+                                <button className='edit_task' onClick={() => editTask(task.id, task.taskTitle)}>
                                     Редактировать
                                     {/* <img className='icon_edit' src={iconEdit} alt="button icon edit" /> */}
                                 </button>
