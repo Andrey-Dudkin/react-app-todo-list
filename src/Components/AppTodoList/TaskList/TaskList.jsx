@@ -35,15 +35,31 @@ const TaskList = ({tasks,setTasks}) => {
         setValue(taskTitle)
     }
     const saveTask = (id) => {
+       
         if(value){
-                let nevTodo = [...tasks].map(elementTask => {
-                    if(elementTask.id === id){
-                        elementTask.taskTitle = value
-                    }
-                    return elementTask
+            axios.post(
+                TASK_SERVICE + "/tasks",
+                {
+                    "id": id,
+                    "userGuid": localStorage.getItem("userId"),
+                    "taskCategoryGuid": null,
+                    "taskTitle": value,
+                    "taskDescription": null,
+                    "toDoStatus": 0
+                  }, 
+                {headers:{"Authorization": "Bearer " + localStorage.getItem("token")}}
+            )
+            .then(response => {
+                    let nevTodo = [...tasks].map(elementTask => {
+                        if(elementTask.id === id){
+                            elementTask.taskTitle = value
+                        }
+                        return elementTask
+                })
+                setTasks(nevTodo)
+                setEdit(null)
             })
-            setTasks(nevTodo)
-            setEdit(null)
+                
         }
     }
     // const statusTask = (id) => {
